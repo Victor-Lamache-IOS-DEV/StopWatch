@@ -2,7 +2,7 @@ name: MagicStopwatch
 options:
   bundleIdPrefix: com.victorlamh
   deploymentTarget:
-    iOS: "17.0"
+    iOS: "26.0"
 
 targets:
   MagicStopwatch:
@@ -21,7 +21,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.victorlamh.magicstopwatch
-        SWIFT_VERSION: "5.9"
+        SWIFT_VERSION: "6.2"
         CODE_SIGN_IDENTITY: ""
         CODE_SIGNING_REQUIRED: "NO"
         CODE_SIGNING_ALLOWED: "NO"

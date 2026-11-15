@@ -4,7 +4,7 @@ import SwiftUI
 struct MagicStopwatchApp: App {
     var body: some Scene {
         WindowGroup {
-            MainStopwatchView()
+            RootTabView()
         }
     }
 }
