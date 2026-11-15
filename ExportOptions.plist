@@ -10,7 +10,7 @@
     <string>manual</string>
     <key>provisioningProfiles</key>
     <dict>
-        <key>com.victorlamh.magicstopwatch</key>
+        <key>com.victorlamache.magicstopwatch</key>
         <string>Victor Lamache Dev Profile</string>
     </dict>
     <key>compileBitcode</key>

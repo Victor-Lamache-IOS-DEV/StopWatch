@@ -20,7 +20,7 @@ targets:
           - UIInterfaceOrientationPortrait
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.victorlamh.magicstopwatch
+        PRODUCT_BUNDLE_IDENTIFIER: com.victorlamache.magicstopwatch
         DEVELOPMENT_TEAM: A63WD37CXZ
         CODE_SIGN_STYLE: Manual
         PROVISIONING_PROFILE_SPECIFIER: "Victor Lamache Dev Profile"
