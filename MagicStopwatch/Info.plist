@@ -29,6 +29,9 @@
     <key>LSRequiresIPhoneOS</key>
     <true/>
 
+    <key>NSAlarmKitUsageDescription</key>
+    <string>Alarms ring at the times you set, even in silent mode.</string>
+
     <key>UILaunchScreen</key>
     <dict/>
 

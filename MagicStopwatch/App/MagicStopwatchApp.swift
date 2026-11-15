@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct MagicStopwatchApp: App {
@@ -6,5 +7,6 @@ struct MagicStopwatchApp: App {
         WindowGroup {
             RootTabView()
         }
+        .modelContainer(for: [City.self, Alarm.self])
     }
 }

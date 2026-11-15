@@ -4,16 +4,27 @@ struct RootTabView: View {
     var body: some View {
         TabView {
             Tab("World Clock", systemImage: "globe") {
-                NavigationStack { WorldClockView() }
+                NavigationStack {
+                    WorldClockView()
+                }
             }
+
             Tab("Alarm", systemImage: "alarm") {
-                NavigationStack { AlarmView() }
+                NavigationStack {
+                    AlarmView()
+                }
             }
+
             Tab("Stopwatch", systemImage: "stopwatch") {
-                NavigationStack { StopwatchView() }
+                NavigationStack {
+                    StopwatchView()
+                }
             }
+
             Tab("Timer", systemImage: "timer") {
-                NavigationStack { TimerView() }
+                NavigationStack {
+                    TimerView()
+                }
             }
         }
         .tint(.orange)
