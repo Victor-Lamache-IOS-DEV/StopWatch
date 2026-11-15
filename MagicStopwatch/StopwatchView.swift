@@ -8,59 +8,57 @@ struct StopwatchView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TimelineView(.animation) { context in
-                let elapsed = engine.isRunning ? engine.currentElapsed() : engine.elapsedTime
-                Text(formatTime(elapsed))
-                    .font(.system(size: 88, weight: .thin, design: .monospaced))
+            TimelineView(.animation) { _ in
+                Text(formatTime(engine.isRunning ? engine.currentElapsed() : engine.elapsedTime))
+                    .font(.system(size: 76, weight: .thin))
                     .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                     .contentShape(Rectangle())
                     .onTapGesture { handleTripleTap() }
             }
-            .frame(maxWidth: .infinity)
             .padding(.top, 60)
-
-            Spacer()
+            .padding(.horizontal, 20)
 
             GlassEffectContainer {
-                HStack(spacing: 40) {
+                HStack {
                     Button {
                         if engine.isRunning { engine.lap() } else { engine.reset() }
                     } label: {
                         Text(engine.isRunning ? "Lap" : "Reset")
-                            .font(.title3)
+                            .font(.body)
                             .frame(width: 80, height: 80)
                     }
                     .buttonStyle(.glass)
+                    .buttonBorderShape(.circle)
                     .tint(.gray)
+
+                    Spacer()
 
                     Button {
                         if engine.isRunning { engine.stop() } else { engine.start() }
                     } label: {
                         Text(engine.isRunning ? "Stop" : "Start")
-                            .font(.title3)
+                            .font(.body)
                             .frame(width: 80, height: 80)
                     }
                     .buttonStyle(.glassProminent)
+                    .buttonBorderShape(.circle)
                     .tint(engine.isRunning ? .red : .green)
                 }
             }
-            .padding(.bottom, 20)
+            .padding(.horizontal, 40)
+            .padding(.vertical, 24)
             .sensoryFeedback(.impact, trigger: engine.laps.count)
 
-            Divider()
-
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(engine.laps) { lap in
-                        LapRow(lap: lap, engine: engine)
-                        Divider().padding(.leading, 16)
-                    }
+            List {
+                ForEach(engine.laps) { lap in
+                    LapRow(lap: lap, engine: engine)
                 }
             }
-            .frame(maxHeight: 300)
+            .listStyle(.plain)
         }
-        .navigationTitle("Stopwatch")
-        .navigationBarTitleDisplayMode(.large)
+        .toolbar(.hidden, for: .navigationBar)
         .sheet(isPresented: $showSettings) {
             SettingsView(engine: engine)
         }
@@ -89,20 +87,29 @@ struct StopwatchView: View {
 struct LapRow: View {
     let lap: Lap
     let engine: StopwatchEngine
+
     var lapColor: Color {
         if lap.id == engine.shortestLapID { return .green }
         if lap.id == engine.longestLapID { return .red }
         return .primary
     }
+
     var body: some View {
         HStack {
             Text("Lap \(lap.lapNumber)")
+                .frame(width: 90, alignment: .leading)
             Spacer()
-            Text(formatTime(lap.lapTime)).monospacedDigit()
+            Text(formatTime(lap.lapTime))
+                .monospacedDigit()
+            Spacer()
+            Text(formatTime(lap.totalTime))
+                .monospacedDigit()
+                .frame(width: 110, alignment: .trailing)
         }
-        .padding(.vertical, 12).padding(.horizontal, 20)
+        .font(.body)
         .foregroundStyle(lapColor)
     }
+
     private func formatTime(_ interval: TimeInterval) -> String {
         let minutes = Int(interval) / 60
         let seconds = Int(interval) % 60
